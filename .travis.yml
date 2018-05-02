@@ -10,3 +10,6 @@ script:
   - export RESULTS_BASE_DIR=dst
   - chmod +x run-unittests.sh
   - ./run-unittests.sh
+#TODO uncomment when tests are running stable initially
+#after_success:
+  - codecov
