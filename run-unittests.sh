@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source $(dirname ${BASH_SOURCE[0]})/src-sh/configuration/config.lib.sh
 
 #"${PYTHON_BINARY}" -c "__requires__ = 'unittest2' ; import pkg_resources ; pkg_resources.run_script('unittest2', 'unit2.py')" discover -v -s test -t . -p *_test.py
