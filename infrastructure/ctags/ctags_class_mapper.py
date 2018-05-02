@@ -1,5 +1,6 @@
 import subprocess
 import collections
+import pprint
 
 class MapperError(Exception):
     pass
@@ -47,5 +48,5 @@ class CTagClassMapper:
         if self.index.has_key(className):
             return self.index[className]
         else:
-            raise MapperError()
+            raise MapperError('Class {0} not found in index ({1})'.format(className, pprint.pformat(self.index)))
 
