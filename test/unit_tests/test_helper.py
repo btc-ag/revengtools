@@ -16,7 +16,7 @@ class TestDirectoryHelper(object):
     
     @staticmethod
     def getTestmoduleDirectory():
-        return path.normpath("test\\unit_tests")
+        return path.normpath(path.join("test", "unit_tests"))
 
 class DefaultModuleListSupply(ModuleListSupply):
     def __init__(self, modules):
