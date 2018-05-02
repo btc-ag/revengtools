@@ -1,0 +1,11 @@
+commons.scm_if.VersionDescriber=commons.scm_default.NullVersionDescriber
+#commons.scm_if.VersionDescriber=infrastructure.scms.svn.version.SVNVersionDescriber
+base.dependency.dependency_if.NodeColorer=epm.dependency_output.EPMNodeColorer
+
+base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABDependencyOutputterConfiguration
+#epm.epm_physical_if.PhysicalModuleDescriber=systems.cab.dependency_output.CABPhysicalModuleDescriber
+base.dependency.dependency_if.ModuleGrouper=epm.cabstyle.dependency_output.CABStyleFinestLevelModuleGrouper
+commons.graph.output_if.NodeGroupingConfiguration=systems.cab.dependency_output.CABModuleGroupingConfiguration
+
+base.diagnostics_if.CheckerRuleFactory=systems.cab.checker.CABCheckerRuleFactory
+

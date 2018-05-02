@@ -1,0 +1,72 @@
+digraph node_shapes {
+	rankdir=LR;
+	graph [fontname="Calibri", fontsize=30 ];
+	node [fontname="Calibri", fontsize=30, style=filled, width=3, height=3 ];
+	edge [fontname="Calibri", fontsize=20];
+
+	
+	node [ fillcolor = white, shape=octagon, rank=1 ]; 
+	LegendeAktivitaeten [label="module with\nadditional in+out-dependencies"];
+	node [ fillcolor = white, shape=ellipse, rank=1 ];
+	LegendeErgebnisartefakte [label="regular module"];
+	node [ fillcolor = white, shape=trapezium, rank=2 ]; 
+	LegendeInterneArtefakte [label="module with\nadditional in-dependencies"];
+	node [ fillcolor = white, shape=invtrapezium, rank=2 ]; 
+	LegendeWerkzeuge [label="module with\nadditional out-dependencies"];
+	node [ fillcolor = white, shape=tab, rank=3 ]; 
+	LegendeExterneArtefakte [label="module group"];
+
+	edge [arrowhead=none,style=invisible];
+	LegendeErgebnisartefakte -> LegendeInterneArtefakte -> LegendeExterneArtefakte;
+	LegendeAktivitaeten -> LegendeWerkzeuge;
+}
+digraph node_colors {
+	rankdir=LR;
+	graph [fontname="Calibri", fontsize=30 ];
+	node [fontname="Calibri", fontsize=30, style=filled, width=3, height=3 ];
+	edge [fontname="Calibri", fontsize=20];
+
+	node [ fillcolor = green3, shape=ellipse, rank=1 ];
+	Interface ;
+	node [ fillcolor = white, shape=ellipse, rank=1 ];
+	Implementation ;
+	node [ fillcolor = green1, shape=ellipse, rank=2 ]; 
+	InterfaceUtility [label ="Interface\nUtility" ];
+	node [ fillcolor = yellow, shape=ellipse, rank=2 ]; 
+	Configurator ;
+	node [ fillcolor = greenyellow, shape=ellipse, rank=3 ]; 
+	InterfaceBaseImplementation [ label="Interface\nBase\nImplementation" ];
+	node [ fillcolor = salmon, shape=ellipse, rank=3 ]; 
+	Test ;
+
+	edge [arrowhead=none,style=invisible];
+	Interface -> InterfaceUtility -> InterfaceBaseImplementation;
+	Implementation -> Configurator -> Test;
+}
+digraph edge_colors {
+	rankdir=LR;
+	graph [fontname="Calibri", fontsize=30 ];
+	node [fontname="Calibri", fontsize=30, style=filled, width=2.5, height=2.5 ];
+	edge [fontname="Calibri", fontsize=24];
+
+	node [ fillcolor = green3, shape=ellipse, rank=1 ];
+	Interface ;
+	node [ fillcolor = white, shape=ellipse, rank=1 ];
+	Implementation ;
+	node [ fillcolor = green1, shape=ellipse, rank=2 ]; 
+	InterfaceUtility [label ="Interface\nUtility" ];
+	node [ fillcolor = white, shape=ellipse, rank=2 ]; 
+	Implementation2 ;
+
+	edge [arrowhead=none,style=invisible];
+	Interface -> InterfaceUtility;
+	Implementation -> Implementation2;
+	
+	edge [arrowhead=normal,constraint=false, arrowsize=3,style=dashed, penwidth=4,minlen=4];
+	Interface -> Implementation [ color="purple", label="EPM rule\nviolation" ];
+	Implementation-> InterfaceUtility [color="red", label="missing \nlink dependency", headport="s" ];
+	Implementation->Implementation2 [color="blue", label="irregular \nlink dependency" ];
+	edge [style=solid, penwidth=1];
+	InterfaceUtility -> Interface [ label="regular dependency" ];
+	
+}

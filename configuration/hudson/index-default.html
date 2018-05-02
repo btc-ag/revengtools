@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Overview of BTC RevEngTools Results</title>
+<link href="styles.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<h1>Overview of BTC RevEngTools Results</h1>
+
+<p>In case of any questions, please contact <a href="mailto:simon.giesecke@btc-ag.com">Simon Giesecke</a>
+or create a bug report or feature proposal in the 
+<a href="http://ejra.e-konzern.de:8080/browse/BTCREGENVTOOLS">RevEngTools JIRA project</a>. 
+Please choose Hudson as the component.
+</p>
+
+<p>Note: The PDF versions may be empty for large graphs due to a bug in the graph layouter GraphViz. 
+Refer to the SVG version in these cases. The SVG versions contain additional information as node and 
+edge tooltips. Chrome is not optimal, but the best currently known option to view SVGs.</p>
+
+<table border="1">
+<tr>
+<th scope="col" class="nobg"></th>
+<th scope="col">Overview</th>
+<th scope="col">Details</th>
+<th scope="col">Details<br/> (w/o transitive deps.)</th>
+<th scope="col">Report</th></tr>
+<tr>
+<th scope="row" class="spec">Module-level link dependencies</th>
+<td>
+<a href="module_link_deps-overview.dot.svg">SVG</a>
+<a href="wide/module_link_deps-overview.dot.pdf">PDF (l)</a>
+<a href="high/module_link_deps-overview.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="module_link_deps.dot.svg">SVG</a>
+<a href="wide/module_link_deps.dot.pdf">PDF (l)</a>
+<a href="high/module_link_deps.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="module_link_deps.tr.dot.svg">SVG</a>
+<a href="wide/module_link_deps.tr.dot.pdf">PDF (l)</a>
+<a href="high/module_link_deps.tr.dot.pdf">PDF (p)</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th scope="row" class="specalt">EPM Physical Rule Violations <br/>based on module-level link dependencies</th>
+<td>
+<a href="module_link_deps-epm-rules-overview.dot.svg">SVG</a>
+<a href="wide/module_link_deps-epm-rules-overview.dot.pdf">PDF (l)</a>
+<a href="high/module_link_deps-epm-rules-overview.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="module_link_deps-epm-rules.dot.svg">SVG</a>
+<a href="wide/module_link_deps-epm-rules.dot.pdf">PDF (l)</a>
+<a href="high/module_link_deps-epm-rules.dot.pdf">PDF (p)</a>
+</td>
+<td>&nbsp;</td>
+<td>to be done</td>
+</tr>
+<tr>
+<th scope="row" class="spec">Module-level include dependencies</th>
+<td>
+<a href="IncludeDeps/module_include_deps-overview.dot.svg">SVG</a>
+<a href="wide/IncludeDeps/module_include_deps-overview.dot.pdf">PDF (l)</a>
+<a href="high/IncludeDeps/module_include_deps-overview.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="IncludeDeps/module_include_deps.dot.svg">SVG</a>
+<a href="wide/IncludeDeps/module_include_deps.dot.pdf">PDF (l)</a>
+<a href="high/IncludeDeps/module_include_deps.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="IncludeDeps/module_include_deps.tr.dot.svg">SVG</a>
+<a href="wide/IncludeDeps/module_include_deps.tr.dot.pdf">PDF (l)</a>
+<a href="high/IncludeDeps/module_include_deps.tr.dot.pdf">PDF (p)</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th scope="row" class="specalt">Module-level link vs. include dependencies</th>
+<td>
+<a href="IncludeDeps/module_include_deps-consistency-overview.dot.svg">SVG</a>
+<a href="wide/IncludeDeps/module_include_deps-consistency-overview.dot.pdf">PDF (l)</a>
+<a href="high/IncludeDeps/module_include_deps-consistency-overview.dot.pdf">PDF (p)</a>
+</td>
+<td>
+<a href="IncludeDeps/module_include_deps-consistency.dot.svg">SVG</a>
+<a href="wide/IncludeDeps/module_include_deps-consistency.dot.pdf">PDF (l)</a>
+<a href="high/IncludeDeps/module_include_deps-consistency.dot.pdf">PDF (p)</a>
+</td>
+<td>&nbsp;</td>
+<td><a href="IncludeDeps/include_link_dep_consistency_report.txt">TXT</a></td>
+</tr>
+</table>
+</body>
+</html>

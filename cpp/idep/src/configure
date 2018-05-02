@@ -1,0 +1,145 @@
+#!/bin/sh
+
+settings_gplusplus() {
+    CXX="g++"
+    CXXOUT="-o "
+    CXXFLAGS="-g "
+    LDD="g++"
+    LDOUT="-o "
+    LDFLAGS=
+    LIBS=
+    LDSUF=
+}
+
+debug_settings_gplusplus() {
+    CXXFLAGS="-g"
+    LDFLAGS="-g"
+}
+
+settings_msvc() {
+    CXX="cl"
+    CXXOUT="/Fo"
+    CXXFLAGS="/nologo /EHsc"
+    LDD="link"
+    LDOUT="/out:"
+    LDFLAGS="/nologo"
+    LIBS=
+    LDSUF=".exe"
+}
+
+debug_settings_msvc() {
+    CXXFLAGS="$CXXFLAGS /Z7"
+    LDFLAGS="/fixed:no /debug"
+}
+
+
+##############################################################
+
+msg_chkfor() {
+    echo -n "checking for "$1" ... "
+}
+
+check_system() {
+    sys=`uname`
+    msg_chkfor "compiler"
+    case "$sys" in
+        *NT)
+            echo "ok. using msvc."
+            settings_msvc
+            ;;
+        *)
+            echo "ok. using g++."
+            settings_gplusplus
+            ;;
+    esac
+}
+
+check_cplusplus() {
+
+    cat << EOF > tmp.c
+#include <iostream>
+int main() {
+    std::cerr << "hello world\n";
+    return 0;
+}
+EOF
+    msg_chkfor "cplusplus"
+    if ${CXX} ${CXXFLAGS} -c tmp.c $CXXOUT/dev/null 2>&3
+    then
+        echo "ok."
+    else
+        echo "no."
+        echo "error: can't compile cplusplus code."
+        exit 1
+    fi
+}
+
+#############################################################################
+
+
+while [ $# -gt 0 ]
+do
+    case $1 in
+
+        --help)
+            cat <<EOF
+
+  Options for configure:
+
+    --debug               enable debug
+    --with-<compiler>     gcc,mscv
+    --help                shows usage of the configure script
+
+EOF
+            exit 0
+            ;;
+
+        --debug)
+            SET_DEBUG=1
+            ;;
+    esac
+    shift
+done
+
+
+##############################################################
+
+exec 3> .config.log
+exec 4> .config.mk
+
+check_system
+
+if [ "$SET_DEBUG" == 1 ]; then
+    case $CXX in 
+        "g++")
+            debug_settings_gplusplus
+            ;;
+        "cl")
+            debug_settings_msvc
+            ;;
+    esac
+fi
+
+echo "# idep's .config.mk" >&4
+echo "#_______________________" >&4
+echo "VERSION=\\\"1.0\\\"" >&4
+echo "prefix=$prefix" >&4
+echo "CXX=${CXX}" >&4
+echo "CXXOUT=${CXXOUT}" >&4
+echo "CXXFLAGS=${CXXFLAGS}" >&4
+echo "LDD=${LDD}" >&4
+echo "LDFLAGS=${LDFLAGS}" >&4
+echo "LDOUT=${LDOUT}" >&4
+echo "LIBS=${LIBS}" >&4
+echo "LDSUF=${LDSUF}" >&4
+echo "#_______________________" >&4
+echo "" >&4
+
+check_cplusplus
+
+echo "#_______________________" >&4
+echo "" >&4
+
+rm -fr tmp.c
+
+# vim:ft=sh

@@ -1,0 +1,67 @@
+xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="revengtools">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ruleDescriptions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rule" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="id" use="optional"/>
+                      <xs:attribute type="xs:string" name="description" use="optional"/>
+                      <xs:attribute type="xs:string" name="severity" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="results">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="diagnosticResults" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="diagnosticResult" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="severityType" name="severity" use="optional"/>
+                            <xs:attribute type="xs:string" name="message" use="optional"/>
+                            <xs:attribute type="xs:string" name="ruleID" use="optional"/>
+                            <xs:attribute type="subjectTypeType" name="subjectType" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="subject" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:float" name="version"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="severityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ignore"/>
+      <xs:enumeration value="info"/>
+      <xs:enumeration value="warning"/>
+      <xs:enumeration value="error"/>
+    </xs:restriction>
+  </xs:simpleType> 
+  <xs:simpleType name="subjectTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="solution"/>
+      <xs:enumeration value="module"/>
+      <xs:enumeration value="module specification file"/>
+      <xs:enumeration value="source file"/>
+    </xs:restriction>
+  </xs:simpleType> 
+</xs:schema>

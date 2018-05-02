@@ -1,0 +1,32 @@
+# Doxyfile 1.8.11
+
+# This file describes the settings to be used by the documentation system
+# doxygen (www.doxygen.org) for a project.
+#
+# All text after a double hash (##) is considered a comment and is placed in
+# front of the TAG it is preceding.
+#
+# All text after a single hash (#) is considered a comment and will be ignored.
+# The format is:
+# TAG = value [value, ...]
+# For lists, items can also be appended using:
+# TAG += value [value, ...]
+# Values that contain spaces should be placed between quotes (\" \").
+
+@INCLUDE = Python/doc/Doxyfile.in   
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+
+# The PROJECT_NAME tag is a single word (or sequence of words) that should
+# identify the project. Note that if you do not use Doxywizard you need
+# to put quotes around the project name if it contains spaces.
+
+PROJECT_NAME           = "Reverse Engineering Tools"
+
+# The PROJECT_NUMBER tag can be used to enter a project or revision number. This
+# could be handy for archiving the generated documentation or if some version
+# control system is used.
+
+PROJECT_NUMBER         = "Version 0.9.0-unreleased"

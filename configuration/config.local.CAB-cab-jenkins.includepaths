@@ -1,0 +1,9 @@
+${local_source_base_dir}/BTC
+C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/atlmfc/include,mfc
+C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/include,std
+C:/Program Files (x86)/Microsoft SDKs/Windows/v6.0A/Include,windows
+${local_source_base_dir}/extern/cppunit-1.12.1/include,cppunit
+${local_source_base_dir}/BTC/Crypto/CPP/extern/Windows-Win32-Debug/include,openssl
+${local_source_base_dir}/extern/apache_apr/src/log4cxx/src/main/include,log4cxx
+${local_source_base_dir}/extern/sqlite-3.6.22,sqlite
+${local_source_base_dir}/extern/apache_apr/src/apr/include/arch/win32,apr

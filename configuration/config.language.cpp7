@@ -1,0 +1,28 @@
+OBJECTTYPES_FUNCTION="'C/C++ Function', 'C/C++ Function Template', 'C/C++ Function Specialization'"
+OBJECTTYPES_FUNCTION_LIKE="$OBJECTTYPES_FUNCTION, 'C++ Method', 'C++ Method Template', 'C++ Constructor', 'C++ Destructor'"
+OBJECTTYPES_CLASS="'C++ Class', 'C++ Class Template'"
+OBJECTTYPES_PROJECT="'C++ Project'"
+OBJECTTYPES_FILE="'C/C++ File'"
+
+# deprecated:
+OBJECTTYPES_CLASSES="$OBJECTTYPES_CLASS"
+
+LINKTYPE_FUNCTION_CALL="' Call()'"
+LINKTYPES_FUNCTION_CALL="' Call()', ' Call() Inherit(override)'"
+LINKTYPES_METHOD_OVERRIDE="' Inherit(override)', ' Call() Inherit(override)', ' Access(read) Inherit(override)'"
+LINKTYPE_CLASS_INHERIT_BASIC="' Inherit()'"
+LINKTYPES_CLASS_INHERIT="$LINKTYPE_CLASS_INHERIT_BASIC, ' Inherit() Friend'"
+LINKTYPE_VARIABLE_READ="' Access(read)'"
+LINKTYPE_VARIABLE_WRITE="' Access(write)'"
+LINKTYPES_VARIABLE_ACCESS="$LINKTYPE_VARIABLE_READ, $LINKTYPE_VARIABLE_WRITE"
+# was ist mit read/write?
+LINKTYPE_HEADER_INCLUDE="' Include'"
+
+
+FormatObjectNameGraphviz() {
+  local TABLE=$1
+  local TABLEPREFIX=""
+  if [ "$TABLE" != "" ] ; then TABLEPREFIX="$TABLE." ; fi
+  
+  echo "(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(${TABLEPREFIX}OBJECT_TYPE_STR, ' ', ''),'(',''),')',''),'.','DOT'),'#','sharp'),'/',''),'+','plus'),'-',''))"
+}

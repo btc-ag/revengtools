@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ioc:config xmlns:ioc="http://www.btc-ag.com/ArchitectureManagement/PyIoC">
+	<ioc:autowiring>
+		<!-- <ioc:include src="autowire.base.xml"/> -->
+		<ioc:autowire abstract="test.unit_tests.commons.testdata.config_tools_testdata.AbstractAutoConfigurable"
+					  concrete="test.unit_tests.commons.testdata.config_tools_testdata.ConcreteAutoConfigurableWithArgs">
+			<ioc:parameter name="testarg" value="12" type="int"/>
+			<!-- <ioc:parameter name="reference" value="blabla" type="object"/> -->
+		</ioc:autowire>		
+	</ioc:autowiring>
+</ioc:config>

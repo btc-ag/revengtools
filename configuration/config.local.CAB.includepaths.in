@@ -1,0 +1,5 @@
+D:/Programme/Microsoft Visual Studio 9.0/VC/atlmfc/include,mfc
+D:/Programme/Microsoft Visual Studio 9.0/VC/include,std
+C:/Programme/Microsoft SDKs/Windows/v7.0A/Include,windows
+D:/PRINS-Analyse/boost_1_44_0,boost
+D:/PRINS-Analyse/CoreAssetBase/extern/cppunit-1.12.1/include,cppunit

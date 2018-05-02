@@ -1,0 +1,1 @@
+base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABWrapperOnlyDependencyOutputterConfiguration

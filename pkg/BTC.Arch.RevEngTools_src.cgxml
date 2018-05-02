@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://olga0822.e-konzern.de:8080/job/Artifact-Server/lastStableBuild/artifact/cab-get.xsd">
+  <name>BTC.Arch.RevEngTools</name>
+  <type>src</type>
+  <version>0.9.0-unreleased</version>
+  <support>none</support>
+  <url>http://wiki.e-konzern.de/x/3dfDAQ</url>
+  <maintainer name="Simon Giesecke" email="simon.giesecke@btc-ag.com"/>
+  <synopsis>BTC Arch RevEngTools - Source Code</synopsis>
+  <description>
+    to be done
+  </description>
+  <install-dir>ArchitectureManagement/Python</install-dir>
+  <fileset>
+    <include name="**"/>
+  </fileset>
+  <dependencies/>
+</package>

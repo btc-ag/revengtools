@@ -1,0 +1,15 @@
+
+base.dependency.dependency_if.DependencyOutputter=base.dependency.dependency_outputter.DefaultDependencyOutputter
+base.dependency.dependency_if.DependencyFilter=base.dependency.dependency_default.DefaultDependencyFilter
+base.dependency.dependency_if_deprecated.DependencyParser=python.dependency_parser.PythonDependencyParser
+
+# base.modules_if.ModuleListSupply=python.modules.FromFilePythonModuleListSupply
+base.modules_if.ModuleListSupply=python.modules.OnTheFlyPythonModuleListSupply
+
+base.dependency.module.linkdeps_if.ModuleLinkDepsSupply=base.dependency.module.otf_linkdeps.OnTheFlyModuleLinkDepsSupply
+
+epm.epm_mapper_if.PhysicalToLogicalMapper=epm.epm_mapper_default.DefaultPhysicalToLogicalMapper
+
+epm.epm_physical_if.PhysicalModuleDescriber=epm.python.mapper.PythonPhysicalModuleDescriber
+
+base.dependency.dependency_if.ModuleGrouper=python.modules.PythonModuleGrouper
