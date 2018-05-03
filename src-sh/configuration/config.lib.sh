@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PARAMETERS="$PARAMETERS
 Parameters used by tools.lib.sh:
