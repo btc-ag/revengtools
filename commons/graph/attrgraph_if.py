@@ -45,7 +45,7 @@ class GraphShapes(Enumeration):
     TypeError: value = 2 <type 'int'>
     
     >>> sorted(map(GraphShapes.name, GraphShapes.values()))
-    ['ELLIPSIS', 'PACKAGE', 'RECTANGLE']
+    ['BOT', 'ELLIPSIS', 'PACKAGE', 'RECTANGLE', 'TOP', 'TOPBOT']
     """
     _type = _GraphShape
     PACKAGE = _GraphShape()
@@ -114,4 +114,9 @@ class EdgeStyles(Enumeration):
     SOLID = _EdgeStyle()
     DASHED = _EdgeStyle()
     DOTTED = _EdgeStyle()
-    
+
+# doctest
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
+
