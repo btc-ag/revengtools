@@ -7,6 +7,8 @@ before_install:
 install:
   - chmod +x install_requirements.sh
   - ./install_requirements.sh
+  - chmod +x build_external.sh
+  - ./build_external.sh
 script:
   - export RESULTS_BASE_DIR=dst
   - chmod +x run-tests.sh

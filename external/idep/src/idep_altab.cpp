@@ -11,7 +11,7 @@ using namespace std;
 
 enum { DEFAULT_TABLE_SIZE = 521 };
 
-static unsigned hash(register const char* name) // Note: returns unsigned!
+static unsigned hashx(register const char* name) // Note: returns unsigned!
 {
     register unsigned sum = 1000003; // 1,000,003 is the 78,498th prime number
     while (*name) {
@@ -83,7 +83,7 @@ int idep_AliasTable::add(const char *alias, const char *originalName)
 {
     enum { FOUND_DIFFERENT = -1, NOT_FOUND = 0, FOUND_IDENTICAL = 1 };
 
-    idep_AliasTableLink *&slot = d_table_p[hash(alias) % d_size];
+    idep_AliasTableLink *&slot = d_table_p[hashx(alias) % d_size];
     idep_AliasTableLink *p = slot;
 
     while (p && 0 != strcmp(p->d_alias_p, alias)) {
@@ -103,7 +103,7 @@ int idep_AliasTable::add(const char *alias, const char *originalName)
 
 const char *idep_AliasTable::lookup(const char *alias) const
 {
-    idep_AliasTableLink *p = d_table_p[hash(alias) % d_size];
+    idep_AliasTableLink *p = d_table_p[hashx(alias) % d_size];
     while (p && 0 != strcmp(p->d_alias_p, alias)) {
         p = p->d_next_p;
     }
