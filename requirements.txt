@@ -1,5 +1,6 @@
 python-graph-core
 pytest-cov
 codecov
+mock
 #pysvn
 #wxPython #install pre-build explicitly in .travis.yml
