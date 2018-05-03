@@ -190,12 +190,12 @@ class CommentFilter(object):
         
         >>> cf = CommentFilter()
         >>> list(cf.filter("/* first line"))
-        ['\n']
+        ['\\n']
         >>> list(cf.filter("second line */"))
-        ['\n']
+        ['\\n']
         >>> cf = CommentFilter()
         >>> list(cf.filter(["/* first line", "second line */"]))
-        ['\n', '\n']
+        ['\\n', '\\n']
         
         @type line_iterator: a iterator of str/unicode (typically an open file) or a single str/unicode
         @rtype: iterator of str or unicode (depending on the type of the input)
