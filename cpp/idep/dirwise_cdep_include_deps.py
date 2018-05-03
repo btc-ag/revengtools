@@ -23,8 +23,11 @@ class DirwiseCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
     
     def __init__(self):
         IncludeDependencyGenerator.__init__(self)
-        self.__cdep_path = os.path.join(config_basic.get_revengtools_basedir(), 
-                                        "cpp", "idep", "cdep.exe")
+        # TODO remove the fallback
+        self.__cdep_path = os.environ.get("CDEP_PROGRAM")
+        if self.__cdep_path is None:
+          self.__cdep_path = os.path.join(config_basic.get_revengtools_basedir(), 
+                                          "cpp", "idep", "cdep.exe")
         self.__directory_to_file_map = None
         self.__file_count = 0
         self.__logger = logging.getLogger(self.__class__.__module__)
@@ -67,11 +70,14 @@ class DirwiseCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
                 #os.path.normpath(os.path.join(directory, os.path.pardir, 'include')),
                 ]
 
+    def _get_cdep_program(self):
+        return self.__cdep_path
 
     def _get_cmdline(self, directory, input_files):
         """
-        >>> DirwiseCdepIncludeDependencyGenerator()._get_cmdline('_dyn', ['_dyn/foo.c'])
-        'D:\\\\PRINS-Analyse\\\\workspace\\\\RevEngTools\\\\cpp\\\\idep\\\\cdep.exe -I. -I_dyn -Iinclude -iNone _dyn/foo.c -x'
+        >>> gen = DirwiseCdepIncludeDependencyGenerator()
+        >>> gen._get_cmdline('_dyn', ['_dyn/foo.c']).replace(gen._get_cdep_program(), "$CDEP")
+        '$CDEP -I. -I_dyn -iNone _dyn/foo.c -x'
         """
         include_path = self.get_include_path(directory)
         cmdline = "%s %s -i%s %s -x" % \
@@ -164,3 +170,4 @@ class DirwiseCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+

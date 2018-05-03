@@ -11,6 +11,7 @@ install:
   - ./build_external.sh
 script:
   - export RESULTS_BASE_DIR=dst
+  - export CDEP_PROGRAM=$(pwd)/external/idep/bin/cdep
   - chmod +x run-tests.sh
   - ./run-tests.sh
 
