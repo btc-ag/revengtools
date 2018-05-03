@@ -33,7 +33,7 @@ def main():
     print ">> Results dir: " + result_dir
     try:
         os.remove(os.path.join(result_dir, "generated_graphs.csv"))
-    except WindowsError:
+    except OSError:
         print "INFO: Could not delete file %s" % os.path.join(result_dir, "generated_graphs.csv")
     if not os.path.isdir(result_dir):
         os.system("mkdir %s" % os.path.join(result_dir))
