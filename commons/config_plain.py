@@ -27,13 +27,13 @@ class PlainAutoWireFormatSuite(IAutoWireFormatSuite):
 
 class PlainAutoWireConfigGenerator(IAutoWireConfigUnparser):
     """
-    >>> gen = AutoWireConfigGenerator()
-    >>> gen.scan_module('commons.database_if')
-    >>> print(gen)
-    # commons.database_if.DatabaseConfiguration=???
-    >>> gen.scan_module('configuration.config_db')
-    >>> print(gen)
-    # commons.database_if.DatabaseConfiguration=configuration.config_db.RevEngToolsDatabaseConfiguration
+    >>> print(PlainAutoWireConfigGenerator({"foo": []}))
+    # foo=???
+    <BLANKLINE>
+
+    >>> print(PlainAutoWireConfigGenerator({"foo": ["bar"]}))
+    # foo=bar
+    <BLANKLINE>
     """
 
     def __init__(self, abstracts_to_concrete_map, selection_strategy_func=lambda x, y: None, args_func=lambda x: None):
@@ -155,3 +155,8 @@ class PlainAutoWireConfigParser(AutoWireConfigParserBase):
                                                     "Invalid line in autowire configuration: %s" % (line,),
                                                     context))
         self._current_line_number = None
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
+
