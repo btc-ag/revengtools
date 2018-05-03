@@ -5,7 +5,7 @@ source $(dirname ${BASH_SOURCE[0]})/src-sh/configuration/config.lib.sh
 {
   # TODO fix setting PYTHONPATH in config.lib.sh, or maybe remove it entirely
   unset PYTHONPATH
-  py.test --doctest-modules --cov=./ --ignore=site-packages --ignore=pydep_run.py --ignore=independent_part_run.py --ignore=infrastructure/graph_layout/zest --verbose
+  py.test --doctest-modules --cov=./ --ignore=site-packages --ignore=pydep_run.py --ignore=independent_part_run.py --ignore=infrastructure/graph_layout/zest --ignore=commons/config_util.py --verbose
   exit
 }
 
