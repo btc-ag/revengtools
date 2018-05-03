@@ -35,8 +35,10 @@ class RevEngToolsConfigParser:
             RevEngToolsConfigParser.__instance.read(RevEngToolsConfigParser.__instance.get('CONFIG', 'config.default'))
             self.load_config('config.language.' + RevEngToolsConfigParser.__instance.get('LANGUAGE'))
             self.load_config('config.local')
-            self.load_config('config.local.' + RevEngToolsConfigParser.__instance.get('SYSTEM'))
-            self.load_config('config.local.' + RevEngToolsConfigParser.__instance.get('VERSION'))
+            if RevEngToolsConfigParser.__instance.get('SYSTEM'):
+                self.load_config('config.local.' + RevEngToolsConfigParser.__instance.get('SYSTEM'))
+            if RevEngToolsConfigParser.__instance.get('VERSION'):
+                self.load_config('config.local.' + RevEngToolsConfigParser.__instance.get('VERSION'))
         self.__dict__['_RevEngToolsConfigParser__instance'] = RevEngToolsConfigParser.__instance
 
     def __getattr__(self, attr):
