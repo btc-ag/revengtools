@@ -1,0 +1,6 @@
+# authors listed in alphabetical order of GitHub user names
+# format:
+# FirstName LastName (GitHubUserName)
+
+Christian Best (chbest-btc)
+Simon Giesecke (sigiesec)
