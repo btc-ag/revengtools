@@ -1,4 +1,5 @@
 python-graph-core
+pytest>=3.5.1
 pytest-cov
 codecov
 mock
