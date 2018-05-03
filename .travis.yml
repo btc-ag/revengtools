@@ -3,7 +3,7 @@ python:
   - "2.7"
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y exuberant-ctags libsvn-dev
+  - sudo apt-get install -y exuberant-ctags libsvn-dev graphviz
 install:
   - chmod +x install_requirements.sh
   - ./install_requirements.sh
