@@ -78,9 +78,11 @@ class RevEngToolsCategoryModuleGrouper(PythonModuleGrouper):
 
     def get_node_group_prefix(self, module):
         """
-        >>> RevEngToolsCategoryModuleGrouper(None).get_node_group_prefix("cpp.bla")
+        >>> grouper = RevEngToolsCategoryModuleGrouper(None)
+        >>> grouper.configure_nodes(["cpp.bla", "base.dependencies"])
+        >>> grouper.get_node_group_prefix("cpp.bla")
         'technologies'
-        >>> RevEngToolsCategoryModuleGrouper(None).get_node_group_prefix("base.dependencies")
+        >>> grouper.get_node_group_prefix("base.dependencies")
         'base'
         """
         for (prefix, new_prefix) in self.replace_at_start.iteritems():
