@@ -8,6 +8,7 @@ Created on 28.09.2010
 @author: SIGIESEC
 '''
 from base.basic_config_if import BasicConfig
+from base.basic_config_base import BasicConfigBase
 from base.dependency.dependency_base import BaseSuffixModuleGrouper
 from base.modules_base import BaseModuleListSupply
 from commons.os_util import FixedBaseDirPathResolver
@@ -18,7 +19,7 @@ import warnings
 config_basic = BasicConfig()
 #config_module_list_supply = ModuleListSupply()
 
-class __MockBasicConfig(object):
+class __MockBasicConfig(BasicConfigBase):
     def get_local_source_base_dir(self):
         return os.path.abspath(os.path.dirname(__file__))
 
@@ -55,11 +56,15 @@ class PythonModuleGrouper(BaseSuffixModuleGrouper):
 
 class PythonModuleListSupplyBase(BaseModuleListSupply):
     """
-    >>> 
-    >>> __main__.config_basic = __MockBasicConfig()
-    >>> PythonModuleListSupplyBase().get_module_size('python.modules') > 0
-    True
-    >>> PythonModuleListSupplyBase().get_files_for_module('python.modules')
+    >>> import sys
+    >>> sys.modules["__main__"].config_basic = __MockBasicConfig
+    >>> sys.modules["base.modules_base"].config_basic = __MockBasicConfig
+    
+    # TODO convert this into a real unit test, this needs an implementation of get_module_list
+    #>>> PythonModuleListSupplyBase().get_module_size('python.modules') > 0
+    #True
+
+    >>> tuple(map(lambda str: str.replace('/', '\\\\'), PythonModuleListSupplyBase().get_files_for_module('python.modules')))
     ('python\\\\modules.py',)
     """
 
