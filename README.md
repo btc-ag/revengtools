@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/btc-ag/revengtools.svg?branch=master)](https://travis-ci.org/btc-ag/revengtools)
+[![codecov](https://codecov.io/gh/btc-ag/revengtools/branch/master/graph/badge.svg)](https://codecov.io/gh/btc-ag/revengtools)
+
 PREREQUISITES for using the RevEngTools
 
 For the shell script-based tools:
