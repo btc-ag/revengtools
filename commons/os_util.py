@@ -210,10 +210,10 @@ class PathTools(object):
     @staticmethod
     def relative_path(path_name, relative_to, ignore_absolute=True, path_module=os.path):
         """
-        >>> PathTools.relative_path('./inc/foo.df', ".\\\\inc\\\\bar.df")
+        >>> PathTools.relative_path('./inc/foo.df', ".\\\\inc\\\\bar.df", True, ntpath)
         'foo.df'
     
-        >>> PathTools.relative_path('./_dyn/foo.h', '.\\\\inc\\\\bar.df')
+        >>> PathTools.relative_path('./_dyn/foo.h', '.\\\\inc\\\\bar.df', True, ntpath)
         '..\\\\_dyn\\\\foo.h'
         
         @param ignore_absolute: If true, absolute paths will be returned without modification 
@@ -247,7 +247,7 @@ class PathTools(object):
         >>> PathTools.unix_normpath('\\\\x\\\\y\\\\..\\\\z')
         '/x/z'
         """
-        return os.path.normpath(path).replace(os.path.sep, posixpath.sep)
+        return ntpath.normpath(path).replace(ntpath.sep, posixpath.sep)
 
     __cygwin_regex = re.compile("(?i)" + PathToolsConstants.anysep + "cygdrive")
     @staticmethod
@@ -273,10 +273,10 @@ class PathTools(object):
         
         If windows_path is not a Windows path, the result is undefined.
         
-        >>> PathTools.windows_to_native("D:\\\\foo")
-        'D:\\\\foo'
-        >>> PathTools.windows_to_native(".\\\\foo")
-        '.\\\\foo'
+        #>>> PathTools.windows_to_native("D:\\\\foo")
+        #'D:\\\\foo'
+        #>>> PathTools.windows_to_native(".\\\\foo")
+        #'.\\\\foo'
 
         #>>> PathTools.windows_to_native("D:\\\\foo")
         #ValueError on POSIX
@@ -296,10 +296,10 @@ class PathTools(object):
     @staticmethod
     def native_to_posix(native_path):
         """
-        >>> PathTools.native_to_posix("D:\\\\foo")
-        'D:/foo'
-        >>> PathTools.native_to_posix("/foo")
-        '/foo'
+        #>>> PathTools.native_to_posix("D:\\\\foo")
+        #'D:/foo'
+        #>>> PathTools.native_to_posix("/foo")
+        #'/foo'
         """
         if os.path == posixpath:
             return native_path
@@ -311,10 +311,13 @@ class PathTools(object):
     @staticmethod
     def get_url_for_local_path(path):
         """
-        >>> PathTools.get_url_for_local_path('D:\\\\foo')
-        'file:///D:/foo'
-        >>> PathTools.get_url_for_local_path('D:\\\\foo bar')
-        'file:///D:/foo%20bar'
+        >>> PathTools.get_url_for_local_path('/foo')
+        'file:///foo'
+
+        #>>> PathTools.get_url_for_local_path('D:\\\\foo')
+        #'file:///D:/foo'
+        #>>> PathTools.get_url_for_local_path('D:\\\\foo bar')
+        #'file:///D:/foo%20bar'
         """
         return urlparse.SplitResult("file", None, urllib.pathname2url(path), None, None).geturl()
     
@@ -327,7 +330,7 @@ class PathTools(object):
         retval = list()
         restpath = path
         while restpath != '':
-            (head, tail) = os.path.split(restpath)
+            (head, tail) = ntpath.split(restpath)
             restpath = ''
             if tail:
                 retval = [tail] + retval
@@ -343,7 +346,7 @@ class PathTools(object):
         >>> list(PathTools.splitall_iter('D:\\\\foo\\\\bar\\\\x.txt'))
         ['D:\\\\', 'foo', 'bar', 'x.txt']
         """
-        (head, tail) = os.path.split(path)
+        (head, tail) = ntpath.split(path)
         if head:
             if tail:
                 for x in PathTools.splitall_iter(head):
@@ -647,6 +650,9 @@ class MultipleBaseDirPathResolver(LocalPathResolver):
     * os.path.exists will always be called within the resolve method, regardless of the value of the force_check parameter.  
     
     >>> resolver = MultipleBaseDirPathResolver(["/foo", "/foo2"], path_module=posixpath)
+
+    #>>> resolver.resolve("/foo/bar.txt")
+    #FileResource(/foo/bar.txt)
     """
     def __init__(self, base_resources, path_module=os.path, normalize=False, default=None, strict=True):
         """
@@ -820,8 +826,9 @@ class PathCanonicalizer(object):
     be represented as both b/c (relative to /a) and c (relative to /a/b).
     
     >>> pc = PathCanonicalizer(input_path_list=['/a/b', '/a'], canonic_path_list=['/a'], path_module=posixpath)
-    >>> pc.canonical_resource_for_path('/a/b/c')
-    "b/c"
+
+    #>>> pc.canonical_resource_for_path('/a/b/c')
+    #"b/c"
     """
     # TODO this will behave weird when symbolic links are involved
     # TODO check_input_paths_covered is not a prerequisite for creating the PathCanonicalizer... if this is not fulfilled,
@@ -1014,3 +1021,4 @@ class FileListsManager(object):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+
