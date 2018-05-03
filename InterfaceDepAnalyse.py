@@ -16,25 +16,26 @@ def parseFileList(fileName):
             res.append(line)
     return res
         
-parser = optparse.OptionParser(usage = "usage: %prog [options] <FileWithSources> <FileWithLeftDlls> <FileWithRightDlls>")
-(options,args) = parser.parse_args()
+if __name__ == "__main__":
+    parser = optparse.OptionParser(usage = "usage: %prog [options] <FileWithSources> <FileWithLeftDlls> <FileWithRightDlls>")
+    (options,args) = parser.parse_args()
 
-logging.basicConfig(format="", level=logging.INFO)
+    logging.basicConfig(format="", level=logging.INFO)
 
-if len(args) != 3:
-    parser.error("Missing parameters!")
+    if len(args) != 3:
+        parser.error("Missing parameters!")
 
-leftSideSourceFiles = parseFileList(args[0])
-leftSideDllFiles = parseFileList(args[1])
-rightSideDllFiles = parseFileList(args[2])
+    leftSideSourceFiles = parseFileList(args[0])
+    leftSideDllFiles = parseFileList(args[1])
+    rightSideDllFiles = parseFileList(args[2])
 
-interval = 120 #days
-logging.info("Using default interval %s", interval)
+    interval = 120 #days
+    logging.info("Using default interval %s", interval)
 
-analyzer = SVNAndInterfaceDepAnalyzer()
-depListWithFileNameAndChanges = analyzer.interface_dependency_analyse(leftSideSourceFiles, leftSideDllFiles, rightSideDllFiles, interval)
+    analyzer = SVNAndInterfaceDepAnalyzer()
+    depListWithFileNameAndChanges = analyzer.interface_dependency_analyse(leftSideSourceFiles, leftSideDllFiles, rightSideDllFiles, interval)
 
-formatString = "{0:<100}{1:<10}{2:<10}"
-print formatString.format("Class","IDeps","Changes")
-for i in depListWithFileNameAndChanges:
-    print formatString.format(i[0],i[2],i[3])
+    formatString = "{0:<100}{1:<10}{2:<10}"
+    print formatString.format("Class","IDeps","Changes")
+    for i in depListWithFileNameAndChanges:
+        print formatString.format(i[0],i[2],i[3])

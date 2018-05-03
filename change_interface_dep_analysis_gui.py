@@ -416,7 +416,8 @@ class MainFrame(wx.Frame):
         #Display
         self.drawPanel.setModuleList(self.currentAnalysisResult)
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-app = wx.App(False)
-MainFrame(None)
-app.MainLoop()
+if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    app = wx.App(False)
+    MainFrame(None)
+    app.MainLoop()
