@@ -13,7 +13,8 @@ class SVNVersionDescriber(VersionDescriber):
 
     def describe_local_version(self, basepath, detailed=True):
         """
-        >>> SVNVersionDescriber().describe_local_version('D:\\PRINS-Analyse\\workspace\\RevEngTools', False)
+        # besides the wrong directory, this assumes we are managed by SVN, which is no longer true
+        #>>> SVNVersionDescriber().describe_local_version('D:\\PRINS-Analyse\\workspace\\RevEngTools', False)
         """
         olddir = os.getcwd()
         os.chdir(basepath)
@@ -43,3 +44,4 @@ class SVNVersionDescriber(VersionDescriber):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+
