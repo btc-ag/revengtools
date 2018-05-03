@@ -1,0 +1,4 @@
+base.dependency.dependency_if_deprecated.DependencyParser=csharp.csproj_parser_wrap.CSharpProjectReferenceDependencyParser
+base.modules_if.ModuleListSupply=csharp.csproj_modules.CSharpModuleListSupply
+epm.epm_physical_if.PhysicalModuleDescriber=epm.csharp.mapper.CSharpPhysicalModuleDescriber
+csharp.csproj_parser.CSProjChecker=csharp.csproj_parser.CSProjCheckerDefault

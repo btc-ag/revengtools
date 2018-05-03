@@ -1,0 +1,9 @@
+Module BTC.CAB.TimeSeries.API (
+ 	Type = Interface
+ 	Language = C#
+ 	Group = BTC.CAB
+ 	//Maintainer = ""
+ 	Description = ""
+ 	UsedModules =
+ 		BTC.CAB.Commons
+)

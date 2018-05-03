@@ -1,0 +1,181 @@
+# base.basic_config_if.BasicConfig=base.basic_config_default.BasicConfigDefault
+# base.basic_config_if.BasicConfig=base.basic_config_base.BasicConfigBase
+# base.basic_config_if.BasicConfig=configuration.config_base.RevEngToolsBasicConfig
+
+# base.dependency.dependency_generator_if.DependencyGraphGenerator=???
+
+# base.dependency.dependency_generator_if.DependencyGraphGeneratorFactory=base.dependency.dependency_default.NullDependencyGraphGeneratorFactory
+
+# base.dependency.dependency_if.DependencyChecker=???
+
+# base.dependency.dependency_if.DependencyFilter=base.dependency.dependency_default.DefaultDependencyFilter[config=???,default_edge_attrs=???,module_list=???]
+
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output_experimental.CABDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=epm.dependency_output.EPMTestOnlyDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABInterfaceOnlyDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=file_include_links_run.MyDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABTestOnlyDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=epm.dependency_output.EPMWrapperOnlyDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=cpp.incl_deps.include_link_lifter_output.LiftIncludeLinksOutputterConfiguration[combined_modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABWrapperOnlyDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=epm.dependency_output.EPMDependencyFilterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=epm.dependency_output.EPMInterfaceOnlyDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABTopLevelDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=epm.python.mapper.PythonEPMDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=base.dependency.dependency_default.NullDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output_experimental.CABWrapperOnlyDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output_experimental.CABInterfaceOnlyDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=base.dependency.dependency_base.BaseDependencyFilterConfiguration[modules=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.revengtools.dependency.RevEngToolsIfOnlyEPMDependencyOutputterConfiguration[focus_on=???]
+# base.dependency.dependency_if.DependencyFilterConfiguration=systems.revengtools.dependency.RevEngToolsEPMDependencyOutputterConfiguration[focus_on=???]
+
+# base.dependency.dependency_if.NodeColorer=epm.dependency_output.EPMNodeColorer
+# base.dependency.dependency_if.NodeColorer=cpp.incl_deps.include_link_lifter_output.LiftIncludeLinksNodeColorer
+
+# base.dependency.dependency_if.OutputterConfiguration=configuration.config_outputters.CurrentOutputterConfiguration
+
+# base.dependency.dependency_if_deprecated.DependencyParser=base.dependency.cab_depends_parser.CABDependsDependencyParser[basic_config=???]
+# base.dependency.dependency_if_deprecated.DependencyParser=python.dependency_parser.PythonDependencyParser
+# base.dependency.dependency_if_deprecated.DependencyParser=cpp.msvc.parse_link_dependencies.LinkDependencyParser[cpp_paths=???]
+# base.dependency.dependency_if_deprecated.DependencyParser=csharp.csproj_parser_wrap.CSharpProjectReferenceDependencyParser
+
+# base.dependency.dependency_output_util.DependencyFilterOutputter=systems.cab.dependency_output_experimental.CABModuleDependencyFilterOutputter[decorator_config=???,base_graph=???]
+# base.dependency.dependency_output_util.DependencyFilterOutputter=systems.revengtools.dependency.ModuleDependencyFilterOutputter[decorator_config=???]
+# base.dependency.dependency_output_util.DependencyFilterOutputter=base.dependency.module.graph_util.DefaultModuleDependencyFilterOutputter[decorator_config=???]
+
+# base.dependency.generation_log_if.GenerationLogGenerator=base.dependency.generation_log.CSVGenerationLogGenerator
+# base.dependency.generation_log_if.GenerationLogGenerator=base.dependency.generation_log.NullGenerationLogGenerator
+
+# base.dependency.generation_log_if.GenerationLogSupply=base.dependency.generation_log.CSVGenerationLogSupply
+
+# base.dependency.module.linkdeps_if.ModuleLinkDepsSupply=base.dependency.module.otf_linkdeps.OnTheFlyModuleLinkDepsSupply[outputter_config=???,link_dependency_parser=???]
+# base.dependency.module.linkdeps_if.ModuleLinkDepsSupply=base.dependency.module.file_linkdeps.FileModuleLinkDepsSupply
+
+# base.modules_if.ModuleListSupply=python.modules.FromFilePythonModuleListSupply[results_resolver=???]
+# base.modules_if.ModuleListSupply=python.modules.PythonModuleListSupplyBase[resource_resolver=???,file_length_calculator=???]
+# base.modules_if.ModuleListSupply=csharp.csproj_modules.CSharpModuleListSupply
+# base.modules_if.ModuleListSupply=base.modules_base.BaseModuleListSupply[resource_resolver=???,file_length_calculator=???]
+# base.modules_if.ModuleListSupply=python.modules.OnTheFlyPythonModuleListSupply[source_resolver=???]
+# base.modules_if.ModuleListSupply=cpp.msvc.file_supply.FileMSVCDataSupply
+
+# commons.graph.attrgraph_if.NodeGrouper=commons.graph.attrgraph_base.NullNodeGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=systems.revengtools.dependency.RevEngToolsCategoryModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=python.modules.PythonModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=epm.cabstyle.dependency_output.CABStyleBaseSuffixModuleGrouperBase[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=systems.cab.dependency_output.CABTopLevelModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=base.dependency.dependency_base.NullModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=base.dependency.dependency_if.ModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=epm.cabstyle.dependency_output.CABStyleFinestLevelModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=epm.cabstyle.dependency_output.CABStyleFinestLevelModuleGrouperInternal[modules=???,internal_modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=base.dependency.dependency_base.BaseSuffixModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=epm.cabstyle.dependency_output.CABStyleTopLevelModuleGrouperBase[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=systems.revengtools.dependency.RevEngToolsModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=systems.cab.dependency_output_experimental.CABModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=systems.cab.dependency_output.CABModuleGrouper[modules=???]
+# commons.graph.attrgraph_if.NodeGrouper=cpp.cpp_util.FileBasedNodeGrouper
+# commons.graph.attrgraph_if.NodeGrouper=file_include_links_run.MyNodeGrouper
+
+# commons.graph.output_if.GraphOutputter=base.dependency.dependency_output_html.HTMLDocumentTextGraphOutputter[graph=???,outfile=???,decorator_config=???,description=???]
+# commons.graph.output_if.GraphOutputter=base.dependency.dependency_output_html.HTMLTableTextGraphOutputter[output_groups=???,graph=???,outfile=???,node_grouper=???,decorator_config=???,description=???,table_model_class=???]
+# commons.graph.output_if.GraphOutputter=infrastructure.graph_layout.graphviz.graphviz.GraphvizGraphOutputter[description=???,outfile=???,graph=???]
+# commons.graph.output_if.GraphOutputter=commons.graph.output_base.TextGraphOutputter
+# commons.graph.output_if.GraphOutputter=infrastructure.graph_layout.graphviz.graphviz.GraphvizRenderingGraphOutputter
+# commons.graph.output_if.GraphOutputter=commons.graph.output_base.DecoratingTextGraphOutputter
+# commons.graph.output_if.GraphOutputter=commons.graph.output_base.BaseGraphOutputter[output_groups=???,graph=???,outfile=???,node_grouper=???,decorator_config=???,description=???]
+# commons.graph.output_if.GraphOutputter=commons.graph.output_base.GenericRenderingGraphOutputter[description=???,outfile=???,graph=???]
+# commons.graph.output_if.GraphOutputter=pydep_run.PydepGraphOutputter[colored=???,types=???,output_groups=???,graph=???,outfile=???,node_grouper=???,node_decorators=???]
+
+# commons.graph.output_if.GraphicalGraphOutputter=commons.graph.output_base.GenericRenderingGraphOutputter[description=???,outfile=???,graph=???]
+# commons.graph.output_if.GraphicalGraphOutputter=infrastructure.graph_layout.graphviz.graphviz.GraphvizRenderingGraphOutputter
+# commons.graph.output_if.GraphicalGraphOutputter=infrastructure.graph_layout.graphviz.graphviz.GraphvizGraphOutputter[description=???,outfile=???,graph=???]
+
+# commons.graph.output_if.NodeGroupingConfiguration=systems.revengtools.dependency.RevEngToolsModuleGroupingConfiguration[module_grouper=???]
+# commons.graph.output_if.NodeGroupingConfiguration=systems.cab.dependency_output_experimental.CABModuleGroupingConfiguration[module_grouper=???]
+# commons.graph.output_if.NodeGroupingConfiguration=commons.graph.output_base.BaseNodeGroupingConfiguration[node_grouper=???]
+# commons.graph.output_if.NodeGroupingConfiguration=commons.graph.output_default.DefaultNodeGroupingConfiguration[collapse_all=???,node_grouper=???]
+# commons.graph.output_if.NodeGroupingConfiguration=systems.cab.dependency_output.CABModuleGroupingConfiguration[module_grouper=???]
+# commons.graph.output_if.NodeGroupingConfiguration=file_include_links_run.MyNodeGroupingConfiguration[node_grouper=???]
+
+# commons.graph.output_if.TextualGraphOutputter=base.dependency.dependency_output_html.HTMLDocumentTextGraphOutputter[graph=???,outfile=???,decorator_config=???,description=???]
+# commons.graph.output_if.TextualGraphOutputter=commons.graph.output_base.DecoratingTextGraphOutputter
+# commons.graph.output_if.TextualGraphOutputter=commons.graph.output_base.TextGraphOutputter
+
+# commons.progress_if.ProgressListener=commons.progress_default.NullProgressListener
+# commons.progress_if.ProgressListener=commons.progress_default.DefaultProgressListener
+
+# commons.scm_if.VersionDescriber=commons.scm_default.NullVersionDescriber
+# commons.scm_if.VersionDescriber=infrastructure.scms.svn.version.SVNVersionDescriber
+
+# cpp.cpp_if.CppDataSupply=cpp.file_supply.FileCppDataSupplier
+
+# cpp.cpp_if.CppFileConfiguration=cpp.cpp_default.DefaultCppFileConfiguration
+
+# cpp.cpp_if.FileToModuleMapSupply=cpp.cpp_default.BaseFileToModuleMapSupply
+# cpp.cpp_if.FileToModuleMapSupply=cpp.otf_module_file_map.OnTheFlyHeaderExceptionOnlyFileToModuleMapSupply
+# cpp.cpp_if.FileToModuleMapSupply=cpp.file_supply.FileFileToModuleMapSupply
+
+# cpp.cpp_if.HeaderListSupply=cpp.incl_deps.file_include_deps.IncludeLinksHeaderListSupply
+# cpp.cpp_if.HeaderListSupply=cpp.file_supply.InternalHeaderListSupply
+
+# cpp.header_linker_if.HeaderLinker=systems.cab.header_linker.CABHeaderLinker[data_supply=???,file_to_module_map_supply=???,outputter=???,use_implementation_mapping_exceptions=???]
+# cpp.header_linker_if.HeaderLinker=cpp.header_linker_default.DefaultHeaderLinker[data_supply=???,file_to_module_map_supply=???,outputter=???,use_implementation_mapping_exceptions=???]
+
+# cpp.incl_deps.include_deps_if.FileIncludeDepsSupply=cpp.incl_deps.file_include_deps.FileFileIncludeDepsSupply
+
+# cpp.incl_deps.include_deps_if.IncludeDependencyGenerator=cpp.idep.dirwise_cdep_include_deps.DirwiseCdepIncludeDependencyGenerator
+# cpp.incl_deps.include_deps_if.IncludeDependencyGenerator=cpp.idep.cdep_include_deps.CdepIncludeDependencyGenerator
+# cpp.incl_deps.include_deps_if.IncludeDependencyGenerator=cpp.idep.threaded_cdep_include_deps.ThreadedCdepIncludeDependencyGenerator
+
+# cpp.incl_deps.include_deps_if.ModuleIncludeDepsSupply=cpp.incl_deps.file_include_deps.FileModuleIncludeDepsSupply
+# cpp.incl_deps.include_deps_if.ModuleIncludeDepsSupply=cpp.incl_deps.otf_include_deps.OnTheFlyModuleIncludeDepsSupply[outputter_config=???,file_to_module_map_supply=???]
+
+# cpp.incl_deps.include_link_lifter_if.IncludeLinkLifter=cpp.incl_deps.include_link_lifter_default.DefaultIncludeLinkLifter[file_include_deps_supply=???,file_to_module_map_supply=???,node_restriction_in=???]
+
+# cpp.incl_deps.include_link_lifter_if.ModuleLinks=cpp.incl_deps.include_link_lifter_util.ModuleLinksImpl[combined_modules=???,node_restriction_in=???]
+
+# cpp.incl_deps.include_list_generator.HeaderCanonicalSorter=cpp.incl_deps.include_list_generator.NullHeaderCanonicalSorter
+# cpp.incl_deps.include_list_generator.HeaderCanonicalSorter=cpp.incl_deps.include_list_generator.StandardGroupCanonicalSorter
+
+# cpp.incl_deps.include_list_generator.HeaderExceptionMapper=cpp.incl_deps.include_list_generator.NullHeaderExceptionMapper
+
+# cpp.incl_deps.include_list_generator.HeaderPathMapper=cpp.incl_deps.include_list_generator.NullHeaderPathMapper
+# cpp.incl_deps.include_list_generator.HeaderPathMapper=cpp.incl_deps.include_list_generator.DefaultHeaderPathMapper
+
+# cpp.incl_deps.include_rule_checker_if.IncludeRuleChecker=cpp.incl_deps.include_rule_checker_if.NullIncludeRuleChecker
+# cpp.incl_deps.include_rule_checker_if.IncludeRuleChecker=systems.cab.include_rules.NoImplementationFileIncludeRule
+# cpp.incl_deps.include_rule_checker_if.IncludeRuleChecker=systems.cab.include_rules.ImplementationHeaderRule
+
+# cpp.incl_deps.include_rule_checker_if.IncludeRulesFactory=systems.cab.include_rules.CABIncludeRulesFactory
+# cpp.incl_deps.include_rule_checker_if.IncludeRulesFactory=cpp.incl_deps.include_rule_checker_if.NullIncludeRulesFactory
+
+# cpp.incl_deps.repair_includes_if.FileNormalizer=cpp.incl_deps.repair_includes_base.BaseFileNormalizer[is_implementation_file_func=???,include_list_generator_factory=???,use_pragma_once=???]
+
+# cpp.incl_deps.repair_includes_if.RequiredIncludeFilesCalculator=cpp.incl_deps.repair_includes_base.OnePhaseRequiredIncludeFilesCalculator[include_map=???,is_implementation_file_func=???,resource_resolver=???]
+# cpp.incl_deps.repair_includes_if.RequiredIncludeFilesCalculator=cpp.incl_deps.repair_includes_base.TwoPhaseRequiredIncludeFilesCalculator[used_symbols_lister=???,header_lister=???,is_implementation_file_func=???,resource_resolver=???]
+# cpp.incl_deps.repair_includes_if.RequiredIncludeFilesCalculator=cpp.incl_deps.repair_includes_wrap.TwoPhaseRequiredIncludeFilesCalculatorWrapper
+
+# cpp.incl_deps.repair_includes_if.SymbolScanner=cpp.incl_deps.repair_includes_base.DefaultSymbolScanner
+
+# cpp.msvc.msvc_supply_if.MSVCDataSupply=cpp.msvc.file_supply.FileMSVCDataSupply
+
+# epm.epm_checker_if.EPMArchitecturalStyleChecker=epm.epm_checker_default.DefaultEPMArchitecturalStyleChecker[module_grouper=???]
+
+# epm.epm_mapper_if.CategoryMapper=???
+
+# epm.epm_mapper_if.PhysicalToLogicalMapper=epm.epm_mapper_default.DefaultPhysicalToLogicalMapper
+
+# epm.epm_physical_if.PhysicalModuleDescriber=systems.cab.dependency_output_experimental.CABPhysicalModuleDescriber
+# epm.epm_physical_if.PhysicalModuleDescriber=epm.csharp.mapper.CSharpPhysicalModuleDescriber
+# epm.epm_physical_if.PhysicalModuleDescriber=epm.epm_mapper_default.NullModuleDescriber
+# epm.epm_physical_if.PhysicalModuleDescriber=epm.cpp.mapper.CppPhysicalModuleDescriber
+# epm.epm_physical_if.PhysicalModuleDescriber=systems.cab.dependency_output.CppCABPhysicalModuleDescriber
+# epm.epm_physical_if.PhysicalModuleDescriber=epm.python.mapper.PythonPhysicalModuleDescriber
+
+# infrastructure.graph_layout.graphviz.graphviz_config.GraphvizConfiguration=configuration.config_graphviz.RevEngToolsGraphvizConfiguration
+
+# test.commons.testdata.config_tools_testdata.AbstractAutoConfigurable=test.commons.testdata.config_tools_testdata.ConcreteAutoConfigurableWithArgs[testarg=???,defarg=???]
+# test.commons.testdata.config_tools_testdata.AbstractAutoConfigurable=test.commons.testdata.config_tools_testdata.ConcreteAutoConfigurable
+# test.commons.testdata.config_tools_testdata.AbstractAutoConfigurable=test.commons.core_util_test.ConcreteAutoConfigurableWithArgsSubclass[testarg=???,defarg=???]
+
+# test.commons.testdata.config_tools_testdata2.AbstractAutoConfigurableOther=test.commons.testdata.config_tools_testdata2.ConcreteAutoConfigurableOther

@@ -1,0 +1,10 @@
+Module BTC.CAB.TimeSeries.API.TestSupport (
+ 	Type = Interface
+ 	Language = C#
+ 	Group = BTC.CAB
+ 	//Maintainer = ""
+ 	Description = ""
+ 	UsedModules =
+ 		BTC.CAB.Commons
+ 		BTC.CAB.TimeSeries.API
+)

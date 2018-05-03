@@ -1,0 +1,1 @@
+commons.scm_if.VersionDescriber=infrastructure.scms.svn.version.SVNVersionDescriber

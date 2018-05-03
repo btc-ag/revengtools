@@ -1,0 +1,8 @@
+python-graph-core
+pytest>=3.5.1
+pytest-cov
+pytest-faulthandler
+codecov
+mock
+#pysvn
+#wxPython #install pre-build explicitly in .travis.yml

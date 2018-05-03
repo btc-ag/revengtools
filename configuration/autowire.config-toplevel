@@ -1,0 +1,2 @@
+base.dependency.dependency_if.ModuleGrouper=systems.cab.dependency_output.CABTopLevelModuleGrouperService
+base.dependency.dependency_if.DependencyFilterConfiguration=systems.cab.dependency_output.CABTopLevelDependencyOutputterConfiguration
