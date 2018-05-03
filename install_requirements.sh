@@ -12,6 +12,7 @@ if ! python -c "import pysvn" ; then
     cp pysvn/__init__.py ${PYTHON_USER_SITE_PACKAGES_DIR}/pysvn
     cp pysvn/_pysvn*.so ${PYTHON_USER_SITE_PACKAGES_DIR}/pysvn
     cd ../..
+    rm -rf pysvn-1.9.5 # remove for testing
 fi
 
 # wxPython
