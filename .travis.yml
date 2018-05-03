@@ -9,6 +9,6 @@ install:
   - ./install_requirements.sh
 script:
   - export RESULTS_BASE_DIR=dst
-  - chmod +x run-unittests.sh
-  - ./run-unittests.sh
+  - chmod +x run-tests.sh
+  - ./run-tests.sh
 
