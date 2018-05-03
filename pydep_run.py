@@ -21,12 +21,18 @@ import imp
 import logging
 import sys
 from base.modules_if import ModuleListSupply
+from commons.configurator import Configurator
+from base.dependency.generation_log_if import GenerationLogGenerator
+from commons.graph.output_util import (NodeGroupDecorator, EdgeGroupDecorator)
+from commons.graph.output_if import (DecoratorSet)
+
+config_generation_log = GenerationLogGenerator()
 
 class PydepGraphOutputter(BaseGraphOutputter):
     do_grouping = False
 
-    def __init__(self, colored, types, output_groups, graph, outfile, node_grouper=NullModuleGrouper(), node_decorators=()):
-        BaseGraphOutputter.__init__(self, output_groups, graph, outfile, node_grouper, node_decorators)
+    def __init__(self, colored, types, output_groups, graph, outfile, node_grouper=NullModuleGrouper(), decorator_config=DecoratorSet(node_tooltip_decorators=[NodeGroupDecorator()], edge_tooltip_decorators=[EdgeGroupDecorator()])):
+        BaseGraphOutputter.__init__(self, output_groups, graph, outfile, node_grouper, decorator_config, config_generation_log)
         assert isinstance(node_grouper, NullModuleGrouper), "cannot currently handle grouped graph"
         self.__types = types
         self.colored = colored
@@ -146,16 +152,20 @@ config_module_grouper = ModuleGrouper
 config_module_list = ModuleListSupply()
 
 class PydepRunner(object):
-    def main(self, paths, filter=DefaultDependencyFilter(config=NullDependencyFilterConfiguration(), module_list=config_module_list.get_module_list())):
+    def run(self, paths, dep_filter=None):
+        if dep_filter is None:
+            dep_filter = DefaultDependencyFilter(config=NullDependencyFilterConfiguration(), module_list=config_module_list.get_module_list())
         processor = PydepProcessor()
         processor.process(paths)
-        processor.output(filter)
+        processor.output(dep_filter)
         PydepGraphOutputter(colored=True,
                             types=processor.types(),
                             output_groups=True,
-                            graph=filter.graph(),
+                            graph=dep_filter.graph(),
                             outfile=sys.stdout).output_all()
 
 if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr, level=logging.INFO)
-    PydepRunner().main(sys.argv[1:])
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    Configurator().default()
+    PydepRunner().run(sys.argv[1:])
+

@@ -93,7 +93,10 @@ class FixedBaseDirPathResolverTest(LocalPathResolverTest, unittest.TestCase):
         return FixedBaseDirPathResolver(self.__get_base_dir())
     
     def case_illegal(self):
-        return ["D:\\lala"]
+        if os.path == ntpath:
+            return ["D:\\lala"]
+        if os.path == posixpath:
+            return ["/foo"]
     
     def case_unknown(self):
         return ["__foo__.xyz"]
