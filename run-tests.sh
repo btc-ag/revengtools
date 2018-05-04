@@ -12,7 +12,7 @@ set -e -x
 
   # TODO make these tests work again
   TEMP_IGNORE_DOCTESTS="--ignore=commons/config_util.py --ignore=systems/cab/header_linker.py --ignore=systems/cab/dependency_output_experimental.py --ignore=systems/cab/dependency_output.py --ignore=configuration/config_base.py --ignore=clustering/clustering_graphviz.py --ignore=base/basic_config_default.py --ignore=cpp/incl_deps/include_list_generator.py --ignore=python/python_util.py --ignore=clustering/clustering.py "
-  TEMP_IGNORE_UNITTESTS="--ignore=test/unit_tests/base/diagnostics_util_test.py --ignore=test/unit_tests/infrastructure/ctags/ctag_class_mapper_test.py "
+  TEMP_IGNORE_UNITTESTS="--ignore=test/unit_tests/base/diagnostics_util_test.py "
   TEMP_IGNORE_INTEGRATIONTESTS="--ignore=test/integration_tests/os_util_long_test.py --ignore=test/integration_tests/cabCsharp_tests/cab_csharp_test.py "
   py.test --doctest-modules --cov=./ --cov-report= --ignore=site-packages --ignore=pydep_run.py --ignore=independent_part_run.py --ignore=infrastructure/graph_layout/zest --ignore=test --verbose $TEMP_IGNORE_DOCTESTS
   py.test --doctest-modules --cov=./ --cov-append test/unit_tests $TEMP_IGNORE_UNITTESTS --verbose

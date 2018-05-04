@@ -1,6 +1,7 @@
 import subprocess
 import collections
 import pprint
+import os
 
 class MapperError(Exception):
     pass
@@ -32,11 +33,11 @@ class CTagClassMapper:
         return (classname, filename)
     def create_index(self, fileList):
         if fileList:
-            ctagsPipe = subprocess.Popen([self.ctag_exe, "-f", "-", "--c#-kinds=cis"] + fileList, stdout=subprocess.PIPE)
+            ctagsPipe = subprocess.Popen([self.ctag_exe, "-f", "-", "--c#-kinds=cis"] + fileList, stdout=subprocess.PIPE, universal_newlines=True)
             ctagOutput = ctagsPipe.communicate()[0]
             
             #Last line is empty => Skip parsing 
-            for line in ctagOutput.split("\r\n")[:-1]:
+            for line in ctagOutput.split(os.linesep)[:-1]:
                 (classname, filename) = self._parse_ctag_line(line)
                 self.index[classname].append(filename)
     def get_type_list(self):
