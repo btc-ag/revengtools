@@ -1,0 +1,26 @@
+coverage:
+  status:
+    project:
+      default: off
+      unit:
+        target: 50%
+        flags: unit
+        paths: "!tests/"
+      integration:
+        flags: integration
+        paths: "!tests/"
+      system:
+        flags: system
+        paths: "!tests/"
+    patch:
+      default: off
+      unit:
+        target: 90%
+        flags: unit
+        paths: "!tests/"
+      integration:
+        flags: integration
+        paths: "!tests/"
+      system:
+        flags: system
+        paths: "!tests/"
