@@ -25,11 +25,11 @@ class DefaultCppFileConfiguration(CppFileConfiguration):
 
     def is_implementation_file(self, path):
         """
-        >>> DefaultCppFileConfiguration.is_implementation_file("foo.c")
+        >>> DefaultCppFileConfiguration().is_implementation_file("foo.c")
         True
-        >>> DefaultCppFileConfiguration.is_implementation_file("foo.cpp")
+        >>> DefaultCppFileConfiguration().is_implementation_file("foo.cpp")
         True
-        >>> DefaultCppFileConfiguration.is_implementation_file("foo.h")
+        >>> DefaultCppFileConfiguration().is_implementation_file("foo.h")
         False
         """
         ext = os.path.splitext(path)[1]
@@ -83,3 +83,9 @@ class BaseFileToModuleMapSupply(FileToModuleMapSupply):
         if self.__module_to_file_map[use_exceptions] == None:
             self.__module_to_file_map[use_exceptions] = CollectionTools.transpose(self.generate_file_to_module_map(use_exceptions))
         return self.__module_to_file_map[use_exceptions]
+
+# doctest
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
+

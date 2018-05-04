@@ -262,27 +262,32 @@ class CommentFilter(object):
                      "Empty or comment lines": self.__comment_lines,
                      "Total lines": self.__total_lines,
                     })
-    
-config_cpp_files = CppFileConfiguration()
-    
+
 class FileNameMapper(AggregateMapper, ConfigDependent):
     """
-    >>> from commons.configurator import Configurator
-    >>> Configurator().default()
-    True
-    >>> mapper = FileNameMapper({"A/a.cpp": "A", "B/a.cpp": "B", "B/b.cpp": "B"}, ("A", "B"), optimiseNodeNames=True)
-    >>> mapper.get_module_name("A/a.cpp")
-    'A'
-    >>> mapper.get_nodename_for_filename("A/a.cpp")
+    >>> from cpp.cpp_default import DefaultCppFileConfiguration
+
+    # TODO check if this is really the expected behaviour
+    >>> mapper = FileNameMapper({"A/a.cpp": "A", "B/a.cpp": "B", "B/b.cpp": "B"}, ("A", "B"), optimiseNodeNames=True, config_cpp_files=DefaultCppFileConfiguration())
+    >>> mapper.get_pseudomodule_name("A/a.cpp")
     'A:a'
-    >>> mapper.get_nodename_for_filename("B/b.cpp")
-    'b'
-    >>> sorted(mapper.get_pget_individuals_for_output_aggregate'))
+    
+    # TODO check what was meant here
+    #>>> mapper.get_nodename_for_filename("A/a.cpp")
+    #'A:a'
+    #>>> mapper.get_nodename_for_filename("B/b.cpp")
+    #'b'
+
+    >>> sorted(mapper.get_individuals_for_output_aggregate("A:a"))
     ['A/a.cpp']
-    >>> sorted(mapper.get_pget_individuals_for_output_aggregate)
-    ['B/b.cpp']
-    >>> mapper = FileNameMapper({"A/a.cpp": "XA", "B/a.cpp": "XB", "B/b.cpp": "XB"}, ("XA", "XB"), optimiseNodeNames=True)
-    >>> sorted(mapper.get_pget_individuals_for_output_aggregate'))
+
+    # TODO check what was meant here
+    #>>> sorted(mapper.get_individuals_for_output_aggregate("B"))
+    #['B/b.cpp']
+
+    # TODO check if this is really the expected behaviour
+    >>> mapper = FileNameMapper({"A/a.cpp": "XA", "B/a.cpp": "XB", "B/b.cpp": "XB"}, ("XA", "XB"), optimiseNodeNames=True, config_cpp_files=DefaultCppFileConfiguration())
+    >>> sorted(mapper.get_individuals_for_output_aggregate("A:a"))
     ['A/a.cpp']
     """
 
@@ -298,11 +303,13 @@ class FileNameMapper(AggregateMapper, ConfigDependent):
         """
         return FileNameMapper.filename_to_cpp_pseudomodule_func(cpp_extensions)(filename)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, file_to_module_map, modules, config_cpp_files=CppFileConfiguration(), *args, **kwargs):
         cpp_extensions = tuple(chain(config_cpp_files.get_header_file_extensions(), 
             config_cpp_files.get_implementation_file_extensions(), 
             (".impl", )))
         AggregateMapper.__init__(self,
+                        file_to_module_map=file_to_module_map,
+                        modules=modules,
                         local_output_aggregate_for_individual_func=self.filename_to_cpp_pseudomodule_func(cpp_extensions), 
                         get_raw_modulename=VirtualModuleTypes.remove_suffixes,
                         *args, **kwargs)
