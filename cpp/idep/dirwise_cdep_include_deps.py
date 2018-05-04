@@ -8,6 +8,7 @@ from base.basic_config_if import BasicConfig
 from commons.progress_if import ProgressListener
 from cpp.cpp_if import CppDataSupply, FileToModuleMapSupply
 from cpp.cpp_util import IncludePathMapping
+from cpp.idep.cdep_include_deps_base import CdepIncludeDependencyGeneratorBase
 from cpp.incl_deps.include_deps_if import IncludeDependencyGenerator
 from tempfile import mkstemp
 import logging
@@ -19,10 +20,10 @@ config_cpp_data_supply = CppDataSupply
 config_file_to_module_map_supply = FileToModuleMapSupply
 config_progress_listener = ProgressListener
 
-class DirwiseCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
+class DirwiseCdepIncludeDependencyGenerator(CdepIncludeDependencyGeneratorBase):
     
     def __init__(self):
-        IncludeDependencyGenerator.__init__(self)
+        CdepIncludeDependencyGeneratorBase.__init__(self)
         # TODO remove the fallback
         self.__cdep_path = os.environ.get("CDEP_PROGRAM")
         if self.__cdep_path is None:
@@ -31,63 +32,17 @@ class DirwiseCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
         self.__directory_to_file_map = None
         self.__file_count = 0
         self.__logger = logging.getLogger(self.__class__.__module__)
-        self.__include_path_temp_filename = None
         self.__progress_listener = config_progress_listener()
 
-    def __del__(self):
-        self.__remove_include_path_temp_file()
-        
-    def __remove_include_path_temp_file(self):
-        if self.__include_path_temp_filename != None:
-            if os.path.exists(self.__include_path_temp_filename):
-                os.unlink(self.__include_path_temp_filename)
-            self.__include_path_temp_filename = None
-        
-    def __generate_include_path_temp_file(self):
-        (tmpfile_handle, self.__include_path_temp_filename) = mkstemp() 
-        # TODO wenn man mkstemp(text=True) verwendet, werden die Zeilenumbrüche anders geschrieben und
-        # idep kommt damit nicht zurecht!
-        tmpfile = os.fdopen(tmpfile_handle, "w")
-        for directory in get_default_include_path_mapping().get_include_directories():
-            self.__logger.debug("Adding include directory %s" % (directory, ))
-            print >>tmpfile, directory
-        tmpfile.close()
-
     def generate(self):
-        self.__generate_include_path_temp_file()
+        self._generate_include_path_temp_file()
         os.chdir(config_basic.get_local_source_base_dir())
         directories = self.__get_directories()
         self.__progress_listener.set_total(len(directories))
         for directory in directories:
             self.generate_dir(directory)
             self.__progress_listener.increment(1)
-        self.__remove_include_path_temp_file()
-
-    def get_include_path(self, directory):
-        # TODO das ist zum Teil CAB/PRINS-Spezifisch, schadet aber vermutlich i.d.R. auch nicht. 
-        return ['.',
-                directory,
-                #os.path.normpath(os.path.join(directory, os.path.pardir, 'include')),
-                ]
-
-    def _get_cdep_program(self):
-        return self.__cdep_path
-
-    def _get_cmdline(self, directory, input_files):
-        """
-        >>> gen = DirwiseCdepIncludeDependencyGenerator()
-        >>> gen._get_cmdline('_dyn', ['_dyn/foo.c']).replace(gen._get_cdep_program(), "$CDEP")
-        '$CDEP -I. -I_dyn -iNone _dyn/foo.c -x'
-        """
-        include_path = self.get_include_path(directory)
-        cmdline = "%s %s -i%s %s -x" % \
-                    (self.__cdep_path,
-                     " ".join("-I%s" % include_dir for include_dir in include_path),
-                     self.__include_path_temp_filename,
-                     " ".join(input_files),
-                    )
-        return cmdline
-
+        self._remove_include_path_temp_file()
 
     @staticmethod
     def split_into_two_halves(input_files):
