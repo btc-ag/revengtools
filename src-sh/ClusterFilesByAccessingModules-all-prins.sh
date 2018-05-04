@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 source $(dirname $0)/tools.lib.sh
 source $REVENGTOOLS_DIST/commons/graph/graphviz/graphviz.lib.sh
