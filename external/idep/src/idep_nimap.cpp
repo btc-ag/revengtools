@@ -13,7 +13,7 @@ using namespace std;
 enum { DEFAULT_TABLE_SIZE = 521 };
 enum { BAD_INDEX = -1 };
 
-static unsigned hash(register const char* name) // Note: returns unsigned!
+static unsigned hashx(register const char* name) // Note: returns unsigned!
 {
     register unsigned sum = 1000003; // 1,000,003 is the 78,498th prime number
     while (*name) {
@@ -93,7 +93,7 @@ idep_NameIndexMap_i::~idep_NameIndexMap_i()
 
 idep_NameIndexMapLink *& idep_NameIndexMap_i::findSlot(const char *name)
 {
-    int index = hash(name) % d_tableSize;
+    int index = hashx(name) % d_tableSize;
     assert(index >= 0 && index < d_tableSize);
     return d_table_p[index];
 }

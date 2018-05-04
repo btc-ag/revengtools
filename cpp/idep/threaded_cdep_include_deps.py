@@ -10,6 +10,7 @@ from commons.progress_if import ProgressListener
 from commons.thread_util import UnTeeWorkerBase, UnTeeHelper
 from cpp.cpp_if import CppDataSupply, FileToModuleMapSupply
 from cpp.cpp_util_wrap import get_default_include_path_mapping
+from cpp.idep.cdep_include_deps_base import CdepIncludeDependencyGeneratorBase
 from cpp.incl_deps.include_deps_if import IncludeDependencyGenerator
 from itertools import chain
 from subprocess import CalledProcessError
@@ -38,41 +39,20 @@ class CdepUnTeeWorker(UnTeeWorkerBase):
         self.__logger.debug("Worker %s finished processing directory %s", threading.currentThread().name, directory)
         self.__logger.debug("Remaining threads: %s", threading.enumerate())
         
-
-class ThreadedCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
+# TODO check for further commonalities with DirwiseCdepIncludeDependencyGenerator and extract them into CdepIncludeDependencyGeneratorBase
+class ThreadedCdepIncludeDependencyGenerator(CdepIncludeDependencyGeneratorBase):
     NUM_THREADS = 80
     
     def __init__(self):
-        IncludeDependencyGenerator.__init__(self)
-        self.__cdep_path = os.path.join(config_basic.get_revengtools_basedir(), 
-                                        "cpp", "idep", "cdep.exe")
+        CdepIncludeDependencyGeneratorBase.__init__(self)
         self.__directory_to_file_map = None
         self.__file_count = 0
         self.__logger = logging.getLogger(self.__class__.__module__)
         self.__include_path_temp_filename = None
         self.__progress_listener = config_progress_listener()
 
-    def __del__(self):
-        self.__remove_include_path_temp_file()
-        
-    def __remove_include_path_temp_file(self):
-        if self.__include_path_temp_filename != None:
-            if os.path.exists(self.__include_path_temp_filename):
-                os.unlink(self.__include_path_temp_filename)
-            self.__include_path_temp_filename = None
-        
-    def __generate_include_path_temp_file(self):
-        (tmpfile_handle, self.__include_path_temp_filename) = mkstemp() 
-        # TODO wenn man mkstemp(text=True) verwendet, werden die Zeilenumbrüche anders geschrieben und
-        # idep kommt damit nicht zurecht!
-        tmpfile = os.fdopen(tmpfile_handle, "w")
-        for directory in get_default_include_path_mapping().get_include_directories():
-            self.__logger.debug("Adding include directory %s" % (directory, ))
-            print >>tmpfile, directory
-        tmpfile.close()
-
     def generate(self):
-        self.__generate_include_path_temp_file()
+        self._generate_include_path_temp_file()
         os.chdir(config_basic.get_local_source_base_dir())
         directories = self.__get_directories()
         self.__progress_listener.set_total(len(directories))
@@ -85,36 +65,13 @@ class ThreadedCdepIncludeDependencyGenerator(IncludeDependencyGenerator):
         untee.join()
 
         # TODO:   self.__progress_listener.increment(1)
-        self.__remove_include_path_temp_file()
-
-    def get_include_path(self, directory):
-        # TODO das ist zum Teil CAB/PRINS-Spezifisch, schadet aber vermutlich i.d.R. auch nicht. 
-        return ['.',
-                directory,
-                os.path.normpath(os.path.join(directory, os.path.pardir, 'include'))]
-
-
-    def _get_cmdline(self, directory, input_files):
-        """
-        >>> DirwiseCdepIncludeDependencyGenerator()._get_cmdline('_dyn', ['_dyn/foo.c'])
-        'D:\\\\PRINS-Analyse\\\\workspace\\\\RevEngTools\\\\cpp\\\\idep\\\\cdep.exe -I. -I_dyn -Iinclude -iNone _dyn/foo.c -x'
-        """
-        include_path = self.get_include_path(directory)
-        cmdline = \
-                    chain((self.__cdep_path,),
-                     ("-I%s" % include_dir for include_dir in include_path),
-                     ("-i%s" % self.__include_path_temp_filename, ),
-                     input_files,
-                     ("-x",)
-                    )
-        return list(cmdline)
-
+        self._remove_include_path_temp_file()
 
     @staticmethod
     def split_into_two_halves(input_files):
         """
         >>> input_files=[1,2,3]
-        >>> two_halves = DirwiseCdepIncludeDependencyGenerator.split_into_two_halves(input_files)
+        >>> two_halves = ThreadedCdepIncludeDependencyGenerator.split_into_two_halves(input_files)
         >>> list(two_halves[0] + two_halves[1]) == input_files
         True
         >>> list(two_halves[0])

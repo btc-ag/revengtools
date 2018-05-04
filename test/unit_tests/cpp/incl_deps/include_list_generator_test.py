@@ -109,8 +109,9 @@ class IncludeListGeneratorInternalTest(unittest.TestCase):
                                                      header_path_mapper=NullHeaderPathMapper(), 
                                                      header_canonical_sorter=StandardGroupCanonicalSorter(), 
                                                      include_generation_timestamp=False)
-        self.assertEquals(['// *** list of 3 include directives (1369018009)', '#include "a/ax.h"', '#include "b/b.h"', '', '#include <string>', '// *** end of generated include list', ''], 
-                          self.__testee.generate_include_directives("a/a.h", ["a/ax.h", "b/b.h", "<string>",])) 
+        # skip initial comment line which contains an implementation-specific hash
+        self.assertEquals(['#include "a/ax.h"', '#include "b/b.h"', '', '#include <string>', '// *** end of generated include list', ''], 
+                          self.__testee.generate_include_directives("a/a.h", ["a/ax.h", "b/b.h", "<string>",])[1:]) 
     def test_duplicated_include(self):
         self.__testee = IncludeListGeneratorInternal(include_guard_normalizer=IncludeGuardNormalizer(use_pragma_once=True), 
                                                      config=IncludeListGeneratorConfig(use_redundant_include_guards=False, 
@@ -121,8 +122,9 @@ class IncludeListGeneratorInternalTest(unittest.TestCase):
                                                      header_path_mapper=NullHeaderPathMapper(), 
                                                      header_canonical_sorter=StandardGroupCanonicalSorter(), 
                                                      include_generation_timestamp=False)
-        self.assertEquals(['// *** list of 3 include directives (1369018009)', '#include "a/ax.h"', '#include "b/b.h"', '', '#include <string>', '// *** end of generated include list', ''], 
-                          self.__testee.generate_include_directives("a/a.h", ["a/ax.h", "a/ax.h", "b/b.h", "<string>",])) 
+        # skip initial comment line which contains an implementation-specific hash
+        self.assertEquals(['#include "a/ax.h"', '#include "b/b.h"', '', '#include <string>', '// *** end of generated include list', ''], 
+                          self.__testee.generate_include_directives("a/a.h", ["a/ax.h", "a/ax.h", "b/b.h", "<string>",])[1:]) 
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testPostcondition']
